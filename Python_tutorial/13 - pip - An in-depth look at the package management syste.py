@@ -4,7 +4,7 @@ pip list
 # mibol van friss
 pip list -o
 
-# frissiteni
+# frissiteni 	
 pip install  -U csomagneve
 
 # projekt -> mi kell hozza
