@@ -1,32 +1,34 @@
 class Employee:
 
-	# olyan mezo, amit nem akarunk felulirni
-	# objektum peldannyal, mennyi dolgozo van
-	nums_of_emps = 0
-	raise_amount = 1.04
+    # olyan mezo, amit nem akarunk felulirni
+    # objektum peldannyal, mennyi dolgozo van
+    nums_of_emps = 0
+    raise_amount = 1.04
 
-	# consturctor
-	def __init__(self, first, last, pay):
-		self.first = first
-		self.last = last
-		self.pay = pay
-		self.email = first +'.' + last + '@company.com'
+    # consturctor
 
-		Employee.nums_of_emps += 1
-		# Employee -> self helyett, csak ez az osztaly 
-		# tudja elerni es valtoztatni
+    def __init__(self, first, last, pay):
+        self.first = first
+        self.last = last
+        self.pay = pay
+        self.email = first + '.' + last + '@company.com'
 
-	def fullname(self):
-		return '{} {}'.format(self.last,self.first)
+        Employee.nums_of_emps += 1
+        # Employee -> self helyett, csak ez az osztaly
+        # tudja elerni es valtoztatni
 
-	def apply_raise(self):
-		# self.pay = int(self.pay * Employee.raise_amount) 
-		self.pay = int(self.pay * self.raise_amount) 
-		# self-fel az objektum peldany felulirhatja a fizu emelest
-		# sot masik osztaly is megteheti ezt
-		# emp_1.raise_amount = 1.06 peldaul
+    def fullname(self):
+        return '{} {}'.format(self.last, self.first)
 
-emp_1 = Employee('Erik', 'Dubrovszkij', 50000 )
+    def apply_raise(self):
+        # self.pay = int(self.pay * Employee.raise_amount)
+        self.pay = int(self.pay * self.raise_amount)
+        # self-fel az objektum peldany felulirhatja a fizu emelest
+        # sot masik osztaly is megteheti ezt
+        # emp_1.raise_amount = 1.06 peldaul
+
+
+emp_1 = Employee('Erik', 'Dubrovszkij', 50000)
 emp_2 = Employee('Test', 'User', 2000)
 
 # emp_1.first = 'Erik'
@@ -44,7 +46,7 @@ emp_2 = Employee('Test', 'User', 2000)
 # nem tudjuk melyik peldany, ezert kell parameterben megadni az emp_1-et
 print(Employee.fullname(emp_1))
 
-# fizu emeles, utana 
+# fizu emeles, utana
 # print(emp_1.pay)
 # emp_1.apply_raise()
 # print(emp_1.pay)
@@ -55,7 +57,7 @@ print(Employee.fullname(emp_1))
 # benne van a raise_amount attribute
 print(Employee.__dict__)
 
-Employee.raise_amount = 1.05 
+Employee.raise_amount = 1.05
 
 # sajat mezeje lett , namespace-en belul
 emp_1.raise_amount = 1.06
