@@ -111,7 +111,55 @@
 #     process.join()
 
 
-# 10 thread with 2x for loop with parameter  --> concurrent.futures 	#####################################
+# 10 thread with 2x for loop --> concurrent.futures 	#####################################
+# import concurrent.futures
+# import time
+
+# start = time.perf_counter()
+
+
+# def do_something(seconds):
+#     print(f'Sleeping {seconds} second(s)...')
+#     time.sleep(seconds)
+#     return 'Done Sleeping...'
+
+
+# if __name__ == "__main__":
+#     with concurrent.futures.ProcessPoolExecutor() as executor:
+#         results = [executor.submit(do_something, 1) for _ in range(10)]
+
+#         for f in concurrent.futures.as_completed(results):
+#             print(f.result())
+
+# finish = time.perf_counter()
+# print(f'Finished in {round(finish-start, 2)} second(s)')
+
+
+# # 10 thread with 2x for loop with parameter --> concurrent.futures 	#####################################
+# import concurrent.futures
+# import time
+
+# start = time.perf_counter()
+
+
+# def do_something(seconds):
+#     print(f'Sleeping {seconds} second(s)...')
+#     time.sleep(seconds)
+#     return 'Done Sleeping...'
+
+
+# if __name__ == "__main__":
+#     with concurrent.futures.ProcessPoolExecutor() as executor:
+#         secs = [5, 4, 3, 2, 1]
+#         results = [executor.submit(do_something, sec) for sec in secs]
+
+#         for f in concurrent.futures.as_completed(results):
+#             print(f.result())
+
+# finish = time.perf_counter()
+# print(f'Finished in {round(finish-start, 2)} second(s)')
+
+# 10 thread with 2x for loop with parameter /mapping --> concurrent.futures 	#####################################
 import concurrent.futures
 import time
 
@@ -121,12 +169,17 @@ start = time.perf_counter()
 def do_something(seconds):
     print(f'Sleeping {seconds} second(s)...')
     time.sleep(seconds)
-    return 'Done Sleeping...'
+    return f'Done Sleeping...{seconds}'
 
 
 if __name__ == "__main__":
     with concurrent.futures.ProcessPoolExecutor() as executor:
-        results = [executor.submit(do_something, 1) for _ range(10)]
+        secs = [5, 4, 3, 2, 1]
+        results = executor.map(do_something, secs)
+        # map-> ossze mappali az ossze bemeneti ertekkel a fgv-t 5 4 3 2 1
 
-        finish = time.perf_counter()
-        print(f'Finished in {round(finish-start, 2)} second(s)')
+        for result in results:
+            print(result)
+
+    finish = time.perf_counter()
+    print(f'Finished in {round(finish-start, 2)} second(s)')
